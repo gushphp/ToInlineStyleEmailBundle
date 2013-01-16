@@ -13,7 +13,7 @@
 >
 
     <testsuites>
-        <testsuite name="ToInlineStyleEmailBundle Test Suite">
+        <testsuite name="ToInlineStyleEmailBundleTest">
             <directory>./Tests</directory>
         </testsuite>
     </testsuites>

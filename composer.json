@@ -22,5 +22,6 @@
     "autoload": {
         "psr-0": { "RobertoTru\\ToInlineStyleEmailBundle": "" }
     },
-    "target-dir": "RobertoTru/ToInlineStyleEmailBundle"
+    "target-dir": "RobertoTru/ToInlineStyleEmailBundle",
+    "minimum-stability": "dev"
 }
