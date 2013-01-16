@@ -11,7 +11,11 @@ ToInlineStyleEmailBundle is only supported on **PHP 5.3.3** and up.
 
 Installation
 ===========
-Please, use composer to install this bundle in your Symfony2 app. Then, register the bundle in your AppKernel. 
+Please, use composer to install this bundle in your Symfony2 app. Then, register the bundle in your AppKernel by adding the following line
+
+``` php
+new RobertoTru\ToInlineStyleEmailBundle\RobertoTruToInlineStyleEmailBundle(),
+``` 
 
 Documentation and Examples
 ===========
@@ -30,5 +34,5 @@ Feel free to contribute for improving this bundle.
 
 About the author of the bundle
 ===========
-ToInlineStyleEmailBundle has been originally developed and is mantained by Roberto Trunfio (see more on the author at www.trunfio.it)
+ToInlineStyleEmailBundle has been originally developed and is mantained by Roberto Trunfio (see more about the author at www.trunfio.it)
 
