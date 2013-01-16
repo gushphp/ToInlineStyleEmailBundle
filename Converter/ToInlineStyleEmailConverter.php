@@ -89,7 +89,7 @@ class ToInlineStyleEmailConverter {
      * class as a service.
      */
     public function __construct(EngineInterface $templating = null) {
-        $this->templating_engine = $templating_engine;
+        $this->templating_engine = $templating;
         $this->cssToInlineStyles = new CssToInlineStyles();
     }
 
