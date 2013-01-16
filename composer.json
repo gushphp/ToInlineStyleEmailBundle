@@ -1,5 +1,6 @@
 {
     "name": "robertotru/to-inline-style-email-bundle",
+    "version": "1.0.0-dev",
     "type": "symfony-bundle",
     "description": "A Symfony2 bundle for using the CssToInlineStyles translator by tijsverkoyen",
     "keywords": ["css", "inline", "style", "email", "symfony", "bundle"],
