@@ -172,7 +172,7 @@ class ToInlineStyleEmailConverter {
      */
     public function setHTMLByView($view, array $parameters = array()){
         if(!is_object($this->templating_engine)) throw new MissingTemplatingEngineException("To use this function, a TwigEngine object must be passed to the constructor (use @templating to the the TwigEngine.");
-        setHTML($this->templating_engine->render($view, $parameters));
+        $this->setHTML($this->templating_engine->render($view, $parameters));
     }
 
     /**
