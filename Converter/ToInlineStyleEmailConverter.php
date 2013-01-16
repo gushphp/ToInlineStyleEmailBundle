@@ -11,7 +11,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ToInlineStyleEmailBundle\Converter;
+namespace RobertoTru\ToInlineStyleEmailBundle\Converter;
 
 use Symfony\Component\Templating\EngineInterface;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;

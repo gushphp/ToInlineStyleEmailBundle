@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace ToInlineStyleEmailBundle\Converter;
+namespace RobertoTruToInlineStyleEmailBundle\Converter;
 
 /**
  * Exception for missing TwigEngine.
