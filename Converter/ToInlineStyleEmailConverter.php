@@ -2,7 +2,7 @@
 /*
  * This file is part of ToInlineStyleEmailBundle.
  *
- * (c) Roberto Trunfio <roberto@trunfio@it>
+ * (c) Roberto Trunfio <roberto@trunfio.it>
  *
  * Part of the functions and fields description is taken from CSSToInlineStyle
  * project by Tijs Verkoyen <php-css-to-inline-styles@verkoyen.eu>
