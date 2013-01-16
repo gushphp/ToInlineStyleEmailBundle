@@ -26,7 +26,7 @@ file_get_contents($this->container->getParameter('kernel.root_dir').'/../src/Acm
 Contributing
 ===========
 ToInlineStyleEmailBundle is an open source project. Contributions are encouraged. 
-Feel free to contribute for improving this bundle.
+Feel free to contribute to improve this bundle.
 
 About the author of the bundle
 ===========
