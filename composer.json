@@ -26,5 +26,10 @@
         "psr-0": { "RobertoTru\\ToInlineStyleEmailBundle": "" }
     },
     "target-dir": "RobertoTru/ToInlineStyleEmailBundle",
+    "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.0-dev"
+            }
+    },    
     "minimum-stability": "dev"
 }
