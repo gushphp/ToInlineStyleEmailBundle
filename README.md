@@ -30,7 +30,7 @@ Then, register the bundle in your AppKernel by adding the following line:
 
 Documentation and Examples
 ===========
-The bundle should provide a service named **css_to_inline_email_converter**. Use it in a controller to have a nice shortcut to the 
+The bundle provides a service named **css_to_inline_email_converter**. Use it in a controller to have a nice shortcut to the 
 converter developed by _Tijs Verkoyen_. E.g.:
 
 ``` php
