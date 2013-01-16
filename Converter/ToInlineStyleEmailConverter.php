@@ -22,7 +22,7 @@ use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
  *
  * The suggested use of this utility is as a service.
  *
- * @author Roberto Trunfio <roberto@trunfio@it>
+ * @author Roberto Trunfio <roberto@trunfio.it>
  */
 class ToInlineStyleEmailConverter {
 

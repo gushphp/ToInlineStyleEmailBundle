@@ -13,7 +13,7 @@ namespace RobertoTru\ToInlineStyleEmailBundle\Converter;
 /**
  * Exception for missing TwigEngine.
  *
- * @author Roberto Trunfio <roberto@trunfio@it>
+ * @author Roberto Trunfio <roberto@trunfio.it>
  */
 class MissingTemplatingEngineException extends Exception {
 

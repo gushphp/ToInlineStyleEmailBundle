@@ -13,7 +13,7 @@ namespace RobertoTru\ToInlineStyleEmailBundle\Converter;
 /**
  * Exception for a missing parameter.
  *
- * @author Roberto Trunfio <roberto@trunfio@it>
+ * @author Roberto Trunfio <roberto@trunfio.it>
  */
 class MissingParamException extends Exception {
 
