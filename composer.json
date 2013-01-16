@@ -1,16 +1,18 @@
 {
     "name": "robertotru/to-inline-style-email-bundle",
     "version": "1.0.0-dev",
+    "time": "2013-01-16",    
     "type": "symfony-bundle",
     "description": "A Symfony2 bundle for using the CssToInlineStyles translator by tijsverkoyen",
     "keywords": ["css", "inline", "style", "email", "symfony", "bundle"],
     "homepage": "http://github.com/robertotru/ToInlineStyleEmailBundle",
-    "license": "BSD",
+    "license": "MIT",
     "authors": [
         {
             "name": "Roberto Trunfio",
             "email": "rtrunfio@deis.unical.it",
-            "homepage": "http://www.trunfio.it"
+            "homepage": "http://www.trunfio.it",
+            "role": "Developer"
         }
     ],
     "require": {
