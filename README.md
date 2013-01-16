@@ -7,14 +7,25 @@ https://github.com/tijsverkoyen/CssToInlineStyles for the repository)
 
 Requirements
 ===========
-ToInlineStyleEmailBundle is only supported on **PHP 5.3.3** and up.
+**ToInlineStyleEmailBundle** is only supported on **PHP 5.3.3** and up.
 
 Installation
 ===========
-Please, use composer to install this bundle in your Symfony2 app. Then, register the bundle in your AppKernel by adding the following line
+Please, use the _Composer_ to install this bundle in your Symfony2 app. 
+
+The following lines should be added in your ```composer.json```
+
+```    
+    "require": {
+        "tijsverkoyen/css-to-inline-styles": "dev-master",
+        "robertotru/to-inline-style-email-bundle": "dev-master"
+    },
+```
+
+Then, register the bundle in your AppKernel by adding the following line:
 
 ``` php
-new RobertoTru\ToInlineStyleEmailBundle\RobertoTruToInlineStyleEmailBundle(),
+    new RobertoTru\ToInlineStyleEmailBundle\RobertoTruToInlineStyleEmailBundle(),
 ```
 
 Documentation and Examples
@@ -65,10 +76,9 @@ Read the docs in the files for further details on the usage of the service.
 
 Contributing
 ===========
-ToInlineStyleEmailBundle is an open source project. Contributions are encouraged. 
+**ToInlineStyleEmailBundle** is an open source project. Contributions are encouraged. 
 Feel free to contribute to improve this bundle.
 
 About the author of the bundle
 ===========
-ToInlineStyleEmailBundle has been originally developed and is mantained by Roberto Trunfio (see more on the author at www.trunfio.it)
-
+**ToInlineStyleEmailBundle** has been originally developed and is mantained by Roberto Trunfio (see more on the author at www.trunfio.it)
