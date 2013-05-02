@@ -29,14 +29,14 @@ class ToInlineStyleEmailConverter {
     /**
      * The EngineInterface used to render the templates. This is optional.
      *
-     * @var Symfony\Component\Templating\EngineInterface
+     * @var \Symfony\Component\Templating\EngineInterface
      */
     private $templating_engine;
 
     /**
      * The class used for CSS-to-inline-style conversion.
      *
-     * @var TijsVerkoyen\CssToInlineStyles\CssToInlineStyles
+     * @var \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles
      */
     protected $cssToInlineStyles;
     /**
@@ -84,7 +84,7 @@ class ToInlineStyleEmailConverter {
     /**
      * Construct the service.
      *
-     * @param Symfony\Component\Templating\EngineInterface[optional] $templating_engine is the engine
+     * @param \Symfony\Component\Templating\EngineInterface $templating_engine is the engine
      * for twig templates. This is optional. Set this param when configuring this
      * class as a service.
      */
@@ -180,14 +180,29 @@ class ToInlineStyleEmailConverter {
      *
      * @param  bool[optional] $outputXHTML Should we output valid XHTML?
      * @return string return the HTML ready to be sent with an inline-style
-     * @throws MissingParamExceptionException the HTML and CSS are mandatory.
+     * @throws MissingParamException the HTML and CSS are mandatory.
      */
     public function generateStyledHTML($outputXHTML = false){
-        if(is_null($this->html))throw new MissingParamExceptionException("The HTML must be set");
-        if(!is_string($this->html))throw new MissingParamExceptionException("The HTML must be a valid string");
-        if(!is_string($this->css))throw new MissingParamExceptionException("The CSS must be set");
-        if(!is_string($this->css))throw new MissingParamExceptionException("The CSS must be a valid string");
+        if(is_null($this->html))throw new MissingParamException("The HTML must be set");
+        if(!is_string($this->html))throw new MissingParamException("The HTML must be a valid string");
+        if(!is_string($this->css))throw new MissingParamException("The CSS must be set");
+        if(!is_string($this->css))throw new MissingParamException("The CSS must be a valid string");
         return  $this->cssToInlineStyles->convert($outputXHTML);
+    }
+
+    /**
+     * Inline CSS inside of HTML and return resulting HTML
+     * @param string $html
+     * @param string $css
+     * @param bool $outputXHTML
+     * @return string
+     */
+    public function inlineCSS($html, $css, $outputXHTML = false)
+    {
+        $this->cssToInlineStyles->setHTML($html);
+        $this->cssToInlineStyles->setCSS($css);
+        
+        return $this->cssToInlineStyles->convert($outputXHTML);
     }
 }
 
