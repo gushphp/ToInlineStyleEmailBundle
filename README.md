@@ -17,7 +17,6 @@ The following lines should be added in your ```composer.json```
 
 ```    
     "require": {
-        "tijsverkoyen/css-to-inline-styles": "dev-master",
         "robertotru/to-inline-style-email-bundle": "dev-master"
     },
 ```
