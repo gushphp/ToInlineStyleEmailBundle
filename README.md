@@ -17,7 +17,6 @@ The following lines should be added in your ```composer.json```
 
 ```    
     "require": {
-        "tijsverkoyen/css-to-inline-styles": "dev-master",
         "robertotru/to-inline-style-email-bundle": "dev-master"
     },
 ```
@@ -63,14 +62,35 @@ Of course, it is supposed that a Symfony user will use a template instead of a s
 for convenience, the service provides a function capable to render a template. E.g.:
 
 ``` php
-     $converter->setHTMLByView('AcmeTestBundle:MyController:my_template.html.twig', 
+  $converter->setHTMLByView('AcmeTestBundle:MyController:my_template.html.twig', 
        array('param_1'=>$val_of_param_1, ..., 'param_n'=>$val_of_param_n));
-   }
 ```
 
 The preceding function must be used _in vece_ of function ```setHTML()```.
 
+You can use inline css directly in Twig template:
 
+``` twig
+  {% inlinecss '/css/email.css' %}
+  <div class="foo">
+    ...
+  </div>
+  {% endinlinecss }
+```
+
+Paths relative to bundle are supported as well:
+
+``` twig
+  {% inlinecss 'AcmeBundle:css:email.css.twig' %}
+  <div class="foo">
+    ...
+  </div>
+  {% endinlinecss }
+```
+
+Please note that twig template is not rendered, but simply returned
+
+__TODO__ fix this weird behavior
 
 Read the docs in the files for further details on the usage of the service. 
 
