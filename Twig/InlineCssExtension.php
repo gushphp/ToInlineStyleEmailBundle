@@ -8,6 +8,8 @@ namespace RobertoTru\ToInlineStyleEmailBundle\Twig;
 
 use RobertoTru\ToInlineStyleEmailBundle\Converter\ToInlineStyleEmailConverter;
 use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator;
+use Symfony\Component\Config\FileLocatorInterface;
+use Symfony\Component\HttpKernel\Config\FileLocator;
 use Symfony\Component\Templating\TemplateNameParserInterface;
 
 class InlineCssExtension extends \Twig_Extension 
@@ -17,19 +19,19 @@ class InlineCssExtension extends \Twig_Extension
      */
     private $inlineCss;
     /**
-     * @var TemplateNameParserInterface
+     * @var string
      */
-    private $templateNameParser;
+    private $kernelRoot;
     /**
      * @var \Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator
      */
     private $locator;
 
-    public function __construct(ToInlineStyleEmailConverter $inlineCss, TemplateNameParserInterface $templateNameParser, TemplateLocator $locator)
+    public function __construct(ToInlineStyleEmailConverter $inlineCss, FileLocatorInterface $locator, $kernelRoot)
     {
         $this->inlineCss = $inlineCss;
-        $this->templateNameParser = $templateNameParser;
         $this->locator = $locator;
+        $this->kernelRoot = $kernelRoot;
     }
 
     /**
@@ -37,7 +39,7 @@ class InlineCssExtension extends \Twig_Extension
      */
     public function getTokenParsers()
     {
-        return [new InlineCssParser($this->templateNameParser, $this->locator)];
+        return [new InlineCssParser($this->locator, $this->kernelRoot . '/../web')];
     }
 
     /**

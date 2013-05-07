@@ -81,16 +81,12 @@ You can use inline css directly in Twig template:
 Paths relative to bundle are supported as well:
 
 ``` html
-{% inlinecss 'AcmeBundle:css:email.css.twig' %}
+{% inlinecss '@AcmeBundle:css:email.css' %}
 <div class="foo">
 ...
 </div>
 {% endinlinecss }
 ```
-
-Please note that twig template is not rendered, but simply returned
-
-__TODO__ fix this weird behavior
 
 Read the docs in the files for further details on the usage of the service. 
 

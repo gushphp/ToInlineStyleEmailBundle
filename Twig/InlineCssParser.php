@@ -7,6 +7,7 @@
 namespace RobertoTru\ToInlineStyleEmailBundle\Twig;
 
 use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator;
+use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Templating\TemplateNameParserInterface;
 use Twig_NodeInterface;
 use Twig_Token;
@@ -22,10 +23,10 @@ class InlineCssParser extends \Twig_TokenParser
      */
     private $locator;
 
-    public function __construct(TemplateNameParserInterface $templateNameParser, TemplateLocator $locator)
+    public function __construct(FileLocatorInterface $locator, $webRoot)
     {
-        $this->templateNameParser = $templateNameParser;
         $this->locator = $locator;
+        $this->webRoot = $webRoot;
     }
 
     /**
@@ -71,8 +72,7 @@ class InlineCssParser extends \Twig_TokenParser
     private function resolvePath($path)
     {
         try {
-            $template = $this->templateNameParser->parse($path);
-            return $this->locator->locate($template);   
+            return $this->locator->locate($path, $this->webRoot);   
         } catch (\InvalidArgumentException $e) {
             //happens when path is not bundle relative
             return $path;
