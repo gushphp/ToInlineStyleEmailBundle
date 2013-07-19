@@ -13,6 +13,7 @@
 
 namespace RobertoTru\ToInlineStyleEmailBundle\Converter;
 
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Templating\EngineInterface;
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
@@ -27,16 +28,17 @@ use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 class ToInlineStyleEmailConverter {
 
     /**
-     * The EngineInterface used to render the templates. This is optional.
+     * Container is used to get template engine instead of direct injection.
+     * Direct injection is not used to avoid circular reference exception when rendering using twig tag
      *
-     * @var Symfony\Component\Templating\EngineInterface
+     * @var ContainerInterface
      */
-    private $templating_engine;
+    private $container;
 
     /**
      * The class used for CSS-to-inline-style conversion.
      *
-     * @var TijsVerkoyen\CssToInlineStyles\CssToInlineStyles
+     * @var \TijsVerkoyen\CssToInlineStyles\CssToInlineStyles
      */
     protected $cssToInlineStyles;
     /**
@@ -84,12 +86,12 @@ class ToInlineStyleEmailConverter {
     /**
      * Construct the service.
      *
-     * @param Symfony\Component\Templating\EngineInterface[optional] $templating_engine is the engine
+     * @param ContainerInterface $container container is used to get templating engine
      * for twig templates. This is optional. Set this param when configuring this
      * class as a service.
      */
-    public function __construct(EngineInterface $templating = null) {
-        $this->templating_engine = $templating;
+    public function __construct(ContainerInterface $container = null) {
+        $this->container = $container;
         $this->cssToInlineStyles = new CssToInlineStyles();
     }
 
@@ -171,23 +173,42 @@ class ToInlineStyleEmailConverter {
      * @throws MissingTemplatingEngineException The TwigEngine must be passed to the constructor, otherwise an exception is thrown
      */
     public function setHTMLByView($view, array $parameters = array()){
-        if(!is_object($this->templating_engine)) throw new MissingTemplatingEngineException("To use this function, a TwigEngine object must be passed to the constructor (use @templating to the the TwigEngine.");
-        $this->setHTML($this->templating_engine->render($view, $parameters));
+        if (!$this->container) {
+            throw new MissingTemplatingEngineException("To use this function, a Container object must be passed to the constructor (@service_container service)");
+        }
+        /** @var EngineInterface $engine */
+        $engine = $this->container->get('templating'); 
+        $this->setHTML($engine->render($view, $parameters));
     }
 
     /**
      * Generate the HTML ready to be sent as email.
      *
-     * @param  bool[optional] $outputXHTML Should we output valid XHTML?
-     * @return string return the HTML ready to be sent with an inline-style
-     * @throws MissingParamExceptionException the HTML and CSS are mandatory.
+     * @param  bool $outputXHTML Should we output valid XHTML? Default false
+     * @return string the HTML ready to be sent with an inline-style
+     * @throws MissingParamException the HTML and CSS are mandatory.
      */
     public function generateStyledHTML($outputXHTML = false){
-        if(is_null($this->html))throw new MissingParamExceptionException("The HTML must be set");
-        if(!is_string($this->html))throw new MissingParamExceptionException("The HTML must be a valid string");
-        if(!is_string($this->css))throw new MissingParamExceptionException("The CSS must be set");
-        if(!is_string($this->css))throw new MissingParamExceptionException("The CSS must be a valid string");
+        if(is_null($this->html))throw new MissingParamException("The HTML must be set");
+        if(!is_string($this->html))throw new MissingParamException("The HTML must be a valid string");
+        if(!is_string($this->css))throw new MissingParamException("The CSS must be set");
+        if(!is_string($this->css))throw new MissingParamException("The CSS must be a valid string");
         return  $this->cssToInlineStyles->convert($outputXHTML);
+    }
+
+    /**
+     * Inline CSS inside of HTML and return resulting HTML
+     * @param string $html
+     * @param string $css
+     * @param bool $outputXHTML
+     * @return string
+     */
+    public function inlineCSS($html, $css, $outputXHTML = false)
+    {
+        $this->cssToInlineStyles->setHTML($html);
+        $this->cssToInlineStyles->setCSS($css);
+        
+        return $this->cssToInlineStyles->convert($outputXHTML);
     }
 }
 
