@@ -15,6 +15,7 @@
             <argument type="service" id="css_to_inline_email_converter" />
             <argument type="service" id="file_locator" />
             <argument>%kernel.root_dir%</argument>
+            <argument>%kernel.debug%</argument>
             <tag name="twig.extension" />
         </service>
     </services>

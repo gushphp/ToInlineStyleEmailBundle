@@ -26,12 +26,17 @@ class InlineCssExtension extends \Twig_Extension
      * @var \Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator
      */
     private $locator;
+    /**
+     * @var bool
+     */
+    private $debug;
 
-    public function __construct(ToInlineStyleEmailConverter $inlineCss, FileLocatorInterface $locator, $kernelRoot)
+    public function __construct(ToInlineStyleEmailConverter $inlineCss, FileLocatorInterface $locator, $kernelRoot, $debug = false)
     {
         $this->inlineCss = $inlineCss;
         $this->locator = $locator;
         $this->kernelRoot = $kernelRoot;
+        $this->debug = $debug;
     }
 
     /**
@@ -39,7 +44,7 @@ class InlineCssExtension extends \Twig_Extension
      */
     public function getTokenParsers()
     {
-        return [new InlineCssParser($this->locator, $this->kernelRoot . '/../web')];
+        return [new InlineCssParser($this->locator, $this->kernelRoot . '/../web', $this->debug)];
     }
 
     /**

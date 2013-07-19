@@ -22,11 +22,21 @@ class InlineCssParser extends \Twig_TokenParser
      * @var \Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator
      */
     private $locator;
+    /**
+     * @var bool
+     */
+    private $debug;
 
-    public function __construct(FileLocatorInterface $locator, $webRoot)
+    /**
+     * @param FileLocatorInterface $locator used to get css asset real path
+     * @param string $webRoot web root of the project
+     * @param bool $debug in debug mode css is not inlined but read on each render
+     */
+    public function __construct(FileLocatorInterface $locator, $webRoot, $debug = false)
     {
         $this->locator = $locator;
         $this->webRoot = $webRoot;
+        $this->debug = $debug;
     }
 
     /**
@@ -46,7 +56,7 @@ class InlineCssParser extends \Twig_TokenParser
         $stream->expect(Twig_Token::BLOCK_END_TYPE);
         
         
-        return new InlineCssNode($body, $this->resolvePath($path), $lineNo); 
+        return new InlineCssNode($body, $this->resolvePath($path), $lineNo, $this->debug); 
     }
 
     /**
