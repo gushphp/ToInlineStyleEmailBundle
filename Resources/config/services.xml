@@ -6,11 +6,17 @@
 
     <parameters>
         <parameter key="css_to_inline_email_converter.class">RobertoTru\ToInlineStyleEmailBundle\Converter\ToInlineStyleEmailConverter</parameter>
+        <parameter key="css_to_inline_email_twig_extension.class">RobertoTru\ToInlineStyleEmailBundle\Twig\InlineCssExtension</parameter>
     </parameters>
 
     <services>
-        <service id="css_to_inline_email_converter" class="%css_to_inline_email_converter.class%">
-            <argument type="service" id="templating" on-invalid="ignore" />
+        <service id="css_to_inline_email_converter" class="%css_to_inline_email_converter.class%" />
+        <service id="css_to_inline_email_twig_extension" class="%css_to_inline_email_twig_extension.class%">
+            <argument type="service" id="css_to_inline_email_converter" />
+            <argument type="service" id="file_locator" />
+            <argument>%kernel.root_dir%</argument>
+            <argument>%kernel.debug%</argument>
+            <tag name="twig.extension" />
         </service>
     </services>
 </container>
