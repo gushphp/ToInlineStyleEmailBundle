@@ -10,7 +10,9 @@
     </parameters>
 
     <services>
-        <service id="css_to_inline_email_converter" class="%css_to_inline_email_converter.class%" />
+        <service id="css_to_inline_email_converter" class="%css_to_inline_email_converter.class%">
+            <argument type="service" id="service_container" />
+        </service>
         <service id="css_to_inline_email_twig_extension" class="%css_to_inline_email_twig_extension.class%">
             <argument type="service" id="css_to_inline_email_converter" />
             <argument type="service" id="file_locator" />
