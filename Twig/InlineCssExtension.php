@@ -44,7 +44,7 @@ class InlineCssExtension extends \Twig_Extension
      */
     public function getTokenParsers()
     {
-        return [new InlineCssParser($this->locator, $this->kernelRoot . '/../web', $this->debug)];
+        return  array( new InlineCssParser($this->locator, $this->kernelRoot . '/../web', $this->debug) );
     }
 
     /**
