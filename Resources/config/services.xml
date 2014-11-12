@@ -15,7 +15,8 @@
         </service>
         <service id="css_to_inline_email_twig_extension" class="%css_to_inline_email_twig_extension.class%">
             <argument type="service" id="css_to_inline_email_converter" />
-            <argument type="service" id="file_locator" />
+            <argument type="service" id="templating.locator" />
+            <argument type="service" id="templating.name_parser" />
             <argument>%kernel.root_dir%</argument>
             <argument>%kernel.debug%</argument>
             <tag name="twig.extension" />

@@ -177,7 +177,7 @@ class ToInlineStyleEmailConverter {
             throw new MissingTemplatingEngineException("To use this function, a Container object must be passed to the constructor (@service_container service)");
         }
         /** @var EngineInterface $engine */
-        $engine = $this->container->get('templating'); 
+        $engine = $this->container->get('templating');
         $this->setHTML($engine->render($view, $parameters));
     }
 
@@ -205,9 +205,11 @@ class ToInlineStyleEmailConverter {
      */
     public function inlineCSS($html, $css, $outputXHTML = false)
     {
+        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+
         $this->cssToInlineStyles->setHTML($html);
         $this->cssToInlineStyles->setCSS($css);
-        
+
         return $this->cssToInlineStyles->convert($outputXHTML);
     }
 }

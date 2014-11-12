@@ -7,6 +7,7 @@
 namespace RobertoTru\ToInlineStyleEmailBundle\Twig;
 
 use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator;
+use Symfony\Bundle\FrameworkBundle\Templating\TemplateNameParser;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Templating\TemplateNameParserInterface;
 use Twig_NodeInterface;
@@ -23,6 +24,10 @@ class InlineCssParser extends \Twig_TokenParser
      */
     private $locator;
     /**
+     * @var \Symfony\Bundle\FrameworkBundle\Templating\TemplateNameParser
+     */
+    private $name_parser;
+    /**
      * @var bool
      */
     private $debug;
@@ -32,9 +37,10 @@ class InlineCssParser extends \Twig_TokenParser
      * @param string $webRoot web root of the project
      * @param bool $debug in debug mode css is not inlined but read on each render
      */
-    public function __construct(FileLocatorInterface $locator, $webRoot, $debug = false)
+    public function __construct(FileLocatorInterface $locator, $name_parser, $webRoot, $debug = false)
     {
         $this->locator = $locator;
+        $this->name_parser = $name_parser;
         $this->webRoot = $webRoot;
         $this->debug = $debug;
     }
@@ -82,7 +88,7 @@ class InlineCssParser extends \Twig_TokenParser
     private function resolvePath($path)
     {
         try {
-            return $this->locator->locate($path, $this->webRoot);   
+            return $this->locator->locate($this->name_parser->parse($path));   
         } catch (\InvalidArgumentException $e) {
             //happens when path is not bundle relative
             return $path;
