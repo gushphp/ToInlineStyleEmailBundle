@@ -6,8 +6,6 @@
  */
 namespace RobertoTru\ToInlineStyleEmailBundle\Twig;
 
-use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator;
-use Symfony\Bundle\FrameworkBundle\Templating\TemplateNameParser;
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Templating\TemplateNameParserInterface;
 use Twig_NodeInterface;
@@ -16,17 +14,20 @@ use Twig_Token;
 class InlineCssParser extends \Twig_TokenParser 
 {
     /**
-     * @var \Symfony\Component\Templating\TemplateNameParserInterface
+     * @var TemplateNameParserInterface
      */
     private $templateNameParser;
+
     /**
-     * @var \Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator
+     * @var FileLocatorInterface
      */
     private $locator;
+
     /**
-     * @var \Symfony\Bundle\FrameworkBundle\Templating\TemplateNameParser
+     * @var string
      */
-    private $name_parser;
+    protected $webRoot;
+
     /**
      * @var bool
      */
@@ -34,13 +35,14 @@ class InlineCssParser extends \Twig_TokenParser
 
     /**
      * @param FileLocatorInterface $locator used to get css asset real path
+     * @param TemplateNameParserInterface $templateNameParser
      * @param string $webRoot web root of the project
      * @param bool $debug in debug mode css is not inlined but read on each render
      */
-    public function __construct(FileLocatorInterface $locator, $name_parser, $webRoot, $debug = false)
+    public function __construct(FileLocatorInterface $locator, TemplateNameParserInterface $templateNameParser, $webRoot, $debug = false)
     {
         $this->locator = $locator;
-        $this->name_parser = $name_parser;
+        $this->templateNameParser = $templateNameParser;
         $this->webRoot = $webRoot;
         $this->debug = $debug;
     }
@@ -88,10 +90,10 @@ class InlineCssParser extends \Twig_TokenParser
     private function resolvePath($path)
     {
         try {
-            return $this->locator->locate($this->name_parser->parse($path));   
+            return $this->locator->locate($this->templateNameParser->parse($path));
         } catch (\InvalidArgumentException $e) {
             //happens when path is not bundle relative
-            return $path;
+            return $this->webRoot.'/'.$path;
         }
     }
 }
