@@ -1,9 +1,5 @@
 <?php
-/**
- * User: avasilenko
- * Date: 5/2/13
- * Time: 17:18
- */
+
 namespace RobertoTru\ToInlineStyleEmailBundle\Twig;
 
 use Symfony\Component\Config\FileLocatorInterface;
@@ -62,8 +58,7 @@ class InlineCssParser extends \Twig_TokenParser
         $stream->expect(Twig_Token::BLOCK_END_TYPE);
         $body = $this->parser->subparse(array($this, 'decideEnd'), true);
         $stream->expect(Twig_Token::BLOCK_END_TYPE);
-        
-        
+
         return new InlineCssNode($body, $this->resolvePath($path), $lineNo, $this->debug); 
     }
 
@@ -92,7 +87,7 @@ class InlineCssParser extends \Twig_TokenParser
         try {
             return $this->locator->locate($this->templateNameParser->parse($path));
         } catch (\InvalidArgumentException $e) {
-            //happens when path is not bundle relative
+            // happens when path is not bundle relative
             return $this->webRoot.'/'.$path;
         }
     }
