@@ -91,7 +91,8 @@ class ToInlineStyleEmailConverter
      * for twig templates. This is optional. Set this param when configuring this
      * class as a service.
      */
-    public function __construct(ContainerInterface $container = null) {
+    public function __construct(ContainerInterface $container = null)
+    {
         $this->container = $container;
         $this->cssToInlineStyles = new CssToInlineStyles();
     }
@@ -105,7 +106,8 @@ class ToInlineStyleEmailConverter
      *
      * @param  bool[optional] $on Should we enable cleanup?
      */
-    public function setCleanup($on = true) {
+    public function setCleanup($on = true)
+    {
         $this->cleanup = (bool) $on;
         $this->cssToInlineStyles->setCleanup($this->cleanup);
     }
@@ -118,7 +120,8 @@ class ToInlineStyleEmailConverter
      *
      * @param  bool[optional] $on Should we process inline styles?
      */
-    public function setUseInlineStylesBlock($on = true) {
+    public function setUseInlineStylesBlock($on = true)
+    {
         $this->useInlineStylesBlock = (bool) $on;
         $this->cssToInlineStyles->setUseInlineStylesBlock($this->useInlineStylesBlock);
     }
@@ -131,7 +134,8 @@ class ToInlineStyleEmailConverter
      *
      * @param  bool[optional] $onShould we process inline styles?
      */
-    public function setStripOriginalStyleTags($on = true) {
+    public function setStripOriginalStyleTags($on = true)
+    {
         $this->stripOriginalStyleTags = (bool) $on;
         $this->cssToInlineStyles->setStripOriginalStyleTags($this->stripOriginalStyleTags);
     }
@@ -141,7 +145,8 @@ class ToInlineStyleEmailConverter
      *
      * @param  string $encoding The encoding to use.
      */
-    public function setEncoding($encoding) {
+    public function setEncoding($encoding)
+    {
         $this->encoding = (string) $encoding;
         $this->cssToInlineStyles->setEncoding($this->encoding);
     }
@@ -151,7 +156,8 @@ class ToInlineStyleEmailConverter
      *
      * @param string $css
      */
-    public function setCSS($css){
+    public function setCSS($css)
+    {
         $this->css = $css;
         $this->cssToInlineStyles->setCSS($this->css);
     }
@@ -161,7 +167,8 @@ class ToInlineStyleEmailConverter
      *
      * @param string $html
      */
-    public function setHTML($html){
+    public function setHTML($html)
+    {
         $this->html = $html;
         $this->cssToInlineStyles->setHTML($this->html);
     }
@@ -173,7 +180,8 @@ class ToInlineStyleEmailConverter
      * @param array[optional] $parameters the array of options to be used for template rendering. This field is optional
      * @throws MissingTemplatingEngineException The TwigEngine must be passed to the constructor, otherwise an exception is thrown
      */
-    public function setHTMLByView($view, array $parameters = array()){
+    public function setHTMLByView($view, array $parameters = array())
+    {
         if (!$this->container) {
             throw new MissingTemplatingEngineException("To use this function, a Container object must be passed to the constructor (@service_container service)");
         }
@@ -189,11 +197,24 @@ class ToInlineStyleEmailConverter
      * @return string the HTML ready to be sent with an inline-style
      * @throws MissingParamException the HTML and CSS are mandatory.
      */
-    public function generateStyledHTML($outputXHTML = false){
-        if(is_null($this->html))throw new MissingParamException("The HTML must be set");
-        if(!is_string($this->html))throw new MissingParamException("The HTML must be a valid string");
-        if(!is_string($this->css))throw new MissingParamException("The CSS must be set");
-        if(!is_string($this->css))throw new MissingParamException("The CSS must be a valid string");
+    public function generateStyledHTML($outputXHTML = false)
+    {
+        if (is_null($this->html)) {
+            throw new MissingParamException("The HTML must be set");
+        }
+
+        if (!is_string($this->html)) {
+            throw new MissingParamException("The HTML must be a valid string");
+        }
+
+        if (!is_string($this->css)) {
+            throw new MissingParamException("The CSS must be set");
+        }
+
+        if (!is_string($this->css)) {
+            throw new MissingParamException("The CSS must be a valid string");
+        }
+
         return  $this->cssToInlineStyles->convert($outputXHTML);
     }
 

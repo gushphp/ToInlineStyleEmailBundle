@@ -15,14 +15,14 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "tijsverkoyen/css-to-inline-styles": "~1.2"
+        "tijsverkoyen/css-to-inline-styles": "~1.5.2"
     },
     "autoload": {
-        "psr-4": { "RobertoTru\\ToInlineStyleEmailBundle": "" }
+        "psr-4": { "RobertoTru\\ToInlineStyleEmailBundle\\": "" }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1-dev"
+            "dev-master": "1.2-dev"
         }
     }
 }

@@ -6,3 +6,5 @@ php:
 
 install:
   - composer install
+
+script: phpunit
