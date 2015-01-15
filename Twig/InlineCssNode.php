@@ -30,6 +30,7 @@ class InlineCssNode extends \Twig_Node
         } else {
             $css = '"' . addslashes(file_get_contents($this->getAttribute('css'))) . '"';
         }
+
         $compiler->addDebugInfo($this)
             ->write("ob_start();\n")
             ->subcompile($this->getNode('body'))
