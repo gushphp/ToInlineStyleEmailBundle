@@ -1,9 +1,14 @@
 <?php
-/**
- * User: avasilenko
- * Date: 5/2/13
- * Time: 17:30
+
+/*
+ * This file is part of ToInlineStyleEmailBundle.
+ *
+ * (c) Roberto Trunfio <roberto@trunfio.it>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
 namespace RobertoTru\ToInlineStyleEmailBundle\Twig;
 
 use Twig_Compiler;
@@ -28,6 +33,7 @@ class InlineCssNode extends \Twig_Node
         $compiler->addDebugInfo($this)
             ->write("ob_start();\n")
             ->subcompile($this->getNode('body'))
-            ->write(sprintf('echo $context["inlinecss"]->inlineCSS(ob_get_clean(), %s);' . "\n", $css));
+            ->write(sprintf('echo $context["inlinecss"]->inlineCSS(ob_get_clean(), %s);' . "\n", $css))
+        ;
     }
 }

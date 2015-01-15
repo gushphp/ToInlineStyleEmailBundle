@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of ToInlineStyleEmailBundle.
  *
@@ -25,8 +26,8 @@ use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
  *
  * @author Roberto Trunfio <roberto@trunfio.it>
  */
-class ToInlineStyleEmailConverter {
-
+class ToInlineStyleEmailConverter
+{
     /**
      * Container is used to get template engine instead of direct injection.
      * Direct injection is not used to avoid circular reference exception when rendering using twig tag

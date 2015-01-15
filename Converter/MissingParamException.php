@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of ToInlineStyleEmailBundle.
  *
@@ -15,6 +16,7 @@ namespace RobertoTru\ToInlineStyleEmailBundle\Converter;
  *
  * @author Roberto Trunfio <roberto@trunfio.it>
  */
-class MissingParamException extends \Exception {
+class MissingParamException extends \Exception
+{
 
 }

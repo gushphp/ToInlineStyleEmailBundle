@@ -1,16 +1,18 @@
 <?php
-/**
- * User: avasilenko
- * Date: 5/2/13
- * Time: 17:56
+
+/*
+ * This file is part of ToInlineStyleEmailBundle.
+ *
+ * (c) Roberto Trunfio <roberto@trunfio.it>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
 namespace RobertoTru\ToInlineStyleEmailBundle\Twig;
 
 use RobertoTru\ToInlineStyleEmailBundle\Converter\ToInlineStyleEmailConverter;
-use Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator;
-use Symfony\Bundle\FrameworkBundle\Templating\TemplateNameParser;
 use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Component\HttpKernel\Config\FileLocator;
 use Symfony\Component\Templating\TemplateNameParserInterface;
 
 class InlineCssExtension extends \Twig_Extension 
@@ -24,11 +26,11 @@ class InlineCssExtension extends \Twig_Extension
      */
     private $kernelRoot;
     /**
-     * @var \Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator
+     * @var FileLocatorInterface
      */
     private $locator;
     /**
-     * @var \Symfony\Bundle\FrameworkBundle\Templating\TemplateNameParser
+     * @var TemplateNameParserInterface
      */
     private $name_parser;
     /**
@@ -36,8 +38,13 @@ class InlineCssExtension extends \Twig_Extension
      */
     private $debug;
 
-    public function __construct(ToInlineStyleEmailConverter $inlineCss, FileLocatorInterface $locator, TemplateNameParser $name_parser, $kernelRoot, $debug = false)
-    {
+    public function __construct(
+        ToInlineStyleEmailConverter $inlineCss,
+        FileLocatorInterface $locator,
+        TemplateNameParserInterface $name_parser,
+        $kernelRoot,
+        $debug = false
+    ) {
         $this->inlineCss = $inlineCss;
         $this->locator = $locator;
         $this->name_parser = $name_parser;
@@ -50,7 +57,7 @@ class InlineCssExtension extends \Twig_Extension
      */
     public function getTokenParsers()
     {
-        return  array( new InlineCssParser($this->locator, $this->name_parser, $this->kernelRoot . '/../web', $this->debug) );
+        return  array(new InlineCssParser($this->locator, $this->name_parser, $this->kernelRoot . '/../web', $this->debug));
     }
 
     /**
@@ -58,7 +65,7 @@ class InlineCssExtension extends \Twig_Extension
      */
     public function getGlobals()
     {
-        return array (
+        return array(
             'inlinecss' => $this->inlineCss,
         );
     }
