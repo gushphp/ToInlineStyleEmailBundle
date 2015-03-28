@@ -74,7 +74,7 @@ You can use inline css directly in Twig template:
 <div class="foo">
 ...
 </div>
-{% endinlinecss }
+{% endinlinecss %}
 ```
 
 Paths relative to bundle are supported as well:
@@ -84,7 +84,7 @@ Paths relative to bundle are supported as well:
 <div class="foo">
 ...
 </div>
-{% endinlinecss }
+{% endinlinecss %}
 ```
 
 Read the docs in the files for further details on the usage of the service. 
