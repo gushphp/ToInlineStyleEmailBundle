@@ -96,4 +96,4 @@ Feel free to contribute to improve this bundle.
 
 About the author of the bundle
 ==============================
-**ToInlineStyleEmailBundle** has been originally developed and is maintained by Roberto Trunfio (see more on the author at www.trunfio.it)
+**ToInlineStyleEmailBundle** has been originally developed by Roberto Trunfio. Currently, the bundle is mantained by Daniel Richter.
