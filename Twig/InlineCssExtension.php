@@ -30,10 +30,6 @@ class InlineCssExtension extends \Twig_Extension implements \Twig_Extension_Glob
      */
     private $locator;
     /**
-     * @var TemplateNameParserInterface
-     */
-    private $name_parser;
-    /**
      * @var bool
      */
     private $debug;
@@ -41,13 +37,11 @@ class InlineCssExtension extends \Twig_Extension implements \Twig_Extension_Glob
     public function __construct(
         ToInlineStyleEmailConverter $inlineCss,
         FileLocatorInterface $locator,
-        TemplateNameParserInterface $name_parser,
         $kernelRoot,
         $debug = false
     ) {
         $this->inlineCss = $inlineCss;
         $this->locator = $locator;
-        $this->name_parser = $name_parser;
         $this->kernelRoot = $kernelRoot;
         $this->debug = $debug;
     }
@@ -57,7 +51,7 @@ class InlineCssExtension extends \Twig_Extension implements \Twig_Extension_Glob
      */
     public function getTokenParsers()
     {
-        return  array(new InlineCssParser($this->locator, $this->name_parser, $this->kernelRoot . '/../web', $this->debug));
+        return array(new InlineCssParser($this->locator, $this->kernelRoot . '/../web', $this->debug));
     }
 
     /**
