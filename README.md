@@ -91,7 +91,7 @@ Read the docs in the files for further details on the usage of the service.
 
 Contributing
 ============
-**ToInlineStyleEmailBundle** is an open source project. Contributions are encouraged. 
+**ToInlineStyleEmailBundle** is an open source project, under MIT license. Contributions are encouraged. 
 Feel free to contribute to improve this bundle.
 
 About the author of the bundle
