@@ -207,7 +207,7 @@ class ToInlineStyleEmailConverter
             throw new MissingParamException("The HTML must be a valid string");
         }
 
-        if (!is_string($this->css)) {
+        if (is_null($this->css)) {
             throw new MissingParamException("The CSS must be set");
         }
 
