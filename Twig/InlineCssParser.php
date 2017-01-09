@@ -56,12 +56,16 @@ class InlineCssParser extends \Twig_TokenParser
     {
         $lineNo = $token->getLine();
         $stream = $this->parser->getStream();
-        $path = $stream->expect(Twig_Token::STRING_TYPE)->getValue();
+        if($stream->test(Twig_Token::STRING_TYPE)){
+            $css = $this->resolvePath($stream->expect(Twig_Token::STRING_TYPE)->getValue());
+        }else{
+            $css = $this->parser->getExpressionParser()->parseExpression();
+        }
         $stream->expect(Twig_Token::BLOCK_END_TYPE);
         $body = $this->parser->subparse(array($this, 'decideEnd'), true);
         $stream->expect(Twig_Token::BLOCK_END_TYPE);
 
-        return new InlineCssNode($body, $this->resolvePath($path), $lineNo, $this->debug);
+        return new InlineCssNode($body, $css, $lineNo, $this->debug);
     }
 
     /**
