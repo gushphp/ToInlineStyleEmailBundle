@@ -96,6 +96,16 @@ Dynamic variable is supported (Use absolute path with variable with asset or dir
 </div>
 {% endinlinecss %}
 ```
+Dynamic variable is supported (Use absolute path with variable with asset or directly with full path to file)
+
+``` html
+{% set path = asset('css/email.css', null, true) %}
+{% inlinecss path %}
+<div class="foo">
+...
+</div>
+{% endinlinecss %}
+```
 
 Read the docs in the files for further details on the usage of the service.
 
