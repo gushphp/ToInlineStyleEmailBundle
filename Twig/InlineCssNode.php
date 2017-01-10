@@ -41,7 +41,7 @@ class InlineCssNode extends \Twig_Node
             $compiler
                 ->addDebugInfo($this)
                 ->write("ob_start();\n")
-                ->write('$css = addslashes(file_get_contents($_SERVER[\'DOCUMENT_ROOT\'] . ')
+                ->write('$css = addslashes(file_get_contents(')
                 ->subcompile($this->getAttribute('css'))
                 ->raw('));')
                 ->subcompile($this->getNode('body'))
