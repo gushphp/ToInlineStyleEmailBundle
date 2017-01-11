@@ -13,11 +13,11 @@ namespace RobertoTru\ToInlineStyleEmailBundle\Twig;
 
 use Twig_Compiler;
 
-class InlineCssNode extends \Twig_Node 
+class InlineCssNode extends \Twig_Node
 {
     private $debug;
-    
-    public function __construct(\Twig_NodeInterface $body, $css, $lineno = 0, $debug, $tag = 'inlinecss')
+
+    public function __construct(\Twig_Node $body, $css, $lineno = 0, $debug, $tag = 'inlinecss')
     {
         $this->debug = $debug;
         parent::__construct(array('body' => $body), array('css' => $css), $lineno, $tag);
