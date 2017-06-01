@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "tijsverkoyen/css-to-inline-styles": "~1.5.2"
+        "tijsverkoyen/css-to-inline-styles": "~2.0"
     },
     "autoload": {
         "psr-4": { "RobertoTru\\ToInlineStyleEmailBundle\\": "" }
