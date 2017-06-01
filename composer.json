@@ -15,14 +15,17 @@
     ],
     "require": {
         "php": ">=5.3.3",
-        "tijsverkoyen/css-to-inline-styles": "~1.5.2"
+        "tijsverkoyen/css-to-inline-styles": "~2.2.0"
+    },
+    "require-dev": {
+        "symfony/framework-bundle": "*"
     },
     "autoload": {
         "psr-4": { "RobertoTru\\ToInlineStyleEmailBundle\\": "" }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.2-dev"
+            "dev-master": "1.3-dev"
         }
     }
 }
