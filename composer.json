@@ -18,7 +18,8 @@
         "tijsverkoyen/css-to-inline-styles": "~2.2.0"
     },
     "require-dev": {
-        "symfony/framework-bundle": "*"
+        "symfony/framework-bundle": "*",
+        "phpunit/phpunit": "^4.4"
     },
     "autoload": {
         "psr-4": { "RobertoTru\\ToInlineStyleEmailBundle\\": "" }
