@@ -10,7 +10,7 @@ Requirements
 
 Installation
 ============
-Please, use the _Composer_ to install this bundle in your Symfony2 app. 
+Please, use the _Composer_ to install this bundle in your Symfony2 app.
 
 The following lines should be added in your ```composer.json```
 
@@ -28,11 +28,11 @@ new RobertoTru\ToInlineStyleEmailBundle\RobertoTruToInlineStyleEmailBundle(),
 
 Documentation and Examples
 ==========================
-The bundle provides a service named **css_to_inline_email_converter**. Use it in a controller to have a nice shortcut to the 
+The bundle provides a service named **css_to_inline_email_converter**. Use it in a controller to have a nice shortcut to the
 converter developed by _Tijs Verkoyen_. E.g.:
 
 ``` php
-public function indexAction() { 
+public function indexAction() {
  $converter = $this->get('css_to_inline_email_converter');
  ...
 }
@@ -42,10 +42,10 @@ Get the HTML and the CSS as a string and set this required values to the convert
 
 ``` php
 $converter = $this->get('css_to_inline_email_converter');
- 
+
 $html = ...; // get the HTML here
 $css = ....; // get the CSS here
-      
+
 $converter->setHTML($html);
 $converter->setCSS($css);
 ```
@@ -57,11 +57,11 @@ file_get_contents($this->container->getParameter('kernel.root_dir').
 '/../src/Acme/TestBundle/Resources/css/mystyle.css');
 ```
 
-Of course, it is supposed that a Symfony user will use a template instead of a static HTML page. Hence, 
+Of course, it is supposed that a Symfony user will use a template instead of a static HTML page. Hence,
 for convenience, the service provides a function capable to render a template. E.g.:
 
 ``` php
-$converter->setHTMLByView('AcmeTestBundle:MyController:my_template.html.twig', 
+$converter->setHTMLByView('AcmeTestBundle:MyController:my_template.html.twig',
    array('param_1'=>$val_of_param_1, ..., 'param_n'=>$val_of_param_n));
 ```
 
@@ -80,18 +80,18 @@ You can use inline css directly in Twig template:
 Paths relative to bundle are supported as well:
 
 ``` html
-{% inlinecss '@AcmeBundle:css:email.css' %}
+{% inlinecss '@AppBundle/Resources/css/email.css' %}
 <div class="foo">
 ...
 </div>
 {% endinlinecss %}
 ```
 
-Read the docs in the files for further details on the usage of the service. 
+Read the docs in the files for further details on the usage of the service.
 
 Contributing
 ============
-**ToInlineStyleEmailBundle** is an open source project, under MIT license. Contributions are encouraged. 
+**ToInlineStyleEmailBundle** is an open source project, under MIT license. Contributions are encouraged.
 Feel free to contribute to improve this bundle.
 
 About the author of the bundle

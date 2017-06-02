@@ -19,11 +19,6 @@ use Twig_Token;
 class InlineCssParser extends \Twig_TokenParser
 {
     /**
-     * @var TemplateNameParserInterface
-     */
-    private $templateNameParser;
-
-    /**
      * @var FileLocatorInterface
      */
     private $locator;
@@ -40,14 +35,12 @@ class InlineCssParser extends \Twig_TokenParser
 
     /**
      * @param FileLocatorInterface $locator used to get css asset real path
-     * @param TemplateNameParserInterface $templateNameParser
      * @param string $webRoot web root of the project
      * @param bool $debug in debug mode css is not inlined but read on each render
      */
-    public function __construct(FileLocatorInterface $locator, TemplateNameParserInterface $templateNameParser, $webRoot, $debug = false)
+    public function __construct(FileLocatorInterface $locator, $webRoot, $debug = false)
     {
         $this->locator = $locator;
-        $this->templateNameParser = $templateNameParser;
         $this->webRoot = $webRoot;
         $this->debug = $debug;
     }
@@ -94,7 +87,7 @@ class InlineCssParser extends \Twig_TokenParser
     private function resolvePath($path)
     {
         try {
-            return $this->locator->locate($this->templateNameParser->parse($path));
+            return $this->locator->locate($path, $this->webRoot);
         } catch (\InvalidArgumentException $e) {
             // happens when path is not bundle relative
             return $this->webRoot.'/'.$path;
