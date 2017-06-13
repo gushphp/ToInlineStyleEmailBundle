@@ -57,34 +57,6 @@ class ToInlineStyleEmailConverter
     protected $css;
 
     /**
-     * Should the generated HTML be cleaned
-     *
-     * @var	bool
-     */
-    private $cleanup = false;
-
-    /**
-     * The encoding to use.
-     *
-     * @var	string
-     */
-    protected $encoding = 'UTF-8';
-
-    /**
-     * Use inline-styles block as CSS
-     *
-     * @var	bool
-     */
-    protected $useInlineStylesBlock = false;
-
-    /*
-     * Strip original style tags
-     *
-     * @var bool
-     */
-    protected $stripOriginalStyleTags = false;
-
-    /**
      * Construct the service.
      *
      * @param ContainerInterface $container container is used to get templating engine
@@ -98,60 +70,6 @@ class ToInlineStyleEmailConverter
     }
 
     /**
-     * If set to true, this function will activate the removal of the
-     * IDs and classes inside the HTML document during conversion.
-     *
-     * This option is false by default.
-     *
-     *
-     * @param  bool[optional] $on Should we enable cleanup?
-     */
-    public function setCleanup($on = true)
-    {
-        $this->cleanup = (bool) $on;
-        $this->cssToInlineStyles->setCleanup($this->cleanup);
-    }
-
-    /**
-     * Set use of inline styles block
-     * If this is enabled the class will use the style-block in the HTML.
-     *
-     * This option is false by default.
-     *
-     * @param  bool[optional] $on Should we process inline styles?
-     */
-    public function setUseInlineStylesBlock($on = true)
-    {
-        $this->useInlineStylesBlock = (bool) $on;
-        $this->cssToInlineStyles->setUseInlineStylesBlock($this->useInlineStylesBlock);
-    }
-
-    /**
-     * Set strip original style tags.
-     * If this is enabled the class will remove all style tags in the HTML.
-     *
-     * This option is false by default.
-     *
-     * @param  bool[optional] $onShould we process inline styles?
-     */
-    public function setStripOriginalStyleTags($on = true)
-    {
-        $this->stripOriginalStyleTags = (bool) $on;
-        $this->cssToInlineStyles->setStripOriginalStyleTags($this->stripOriginalStyleTags);
-    }
-
-    /**
-     * Set the encoding to use with the DOMDocument. Default encoding value is "UTF-8".
-     *
-     * @param  string $encoding The encoding to use.
-     */
-    public function setEncoding($encoding)
-    {
-        $this->encoding = (string) $encoding;
-        $this->cssToInlineStyles->setEncoding($this->encoding);
-    }
-
-    /**
      * Set the string which represents the CSS for the HTML file to be sent as email.
      *
      * @param string $css
@@ -159,7 +77,6 @@ class ToInlineStyleEmailConverter
     public function setCSS($css)
     {
         $this->css = $css;
-        $this->cssToInlineStyles->setCSS($this->css);
     }
 
     /**
@@ -170,7 +87,6 @@ class ToInlineStyleEmailConverter
     public function setHTML($html)
     {
         $this->html = $html;
-        $this->cssToInlineStyles->setHTML($this->html);
     }
 
     /**
@@ -193,11 +109,10 @@ class ToInlineStyleEmailConverter
     /**
      * Generate the HTML ready to be sent as email.
      *
-     * @param  bool $outputXHTML Should we output valid XHTML? Default false
      * @return string the HTML ready to be sent with an inline-style
      * @throws MissingParamException the HTML and CSS are mandatory.
      */
-    public function generateStyledHTML($outputXHTML = false)
+    public function generateStyledHTML()
     {
         if (is_null($this->html)) {
             throw new MissingParamException("The HTML must be set");
@@ -215,24 +130,18 @@ class ToInlineStyleEmailConverter
             throw new MissingParamException("The CSS must be a valid string");
         }
 
-        return  $this->cssToInlineStyles->convert($outputXHTML);
+        return  $this->cssToInlineStyles->convert($this->html, $this->css);
     }
 
     /**
      * Inline CSS inside of HTML and return resulting HTML
      * @param string $html
      * @param string $css
-     * @param bool $outputXHTML
      * @return string
      */
-    public function inlineCSS($html, $css, $outputXHTML = false)
+    public function inlineCSS($html, $css)
     {
-        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
-
-        $this->cssToInlineStyles->setHTML($html);
-        $this->cssToInlineStyles->setCSS($css);
-
-        return $this->cssToInlineStyles->convert($outputXHTML);
+        return $this->cssToInlineStyles->convert($html, $css);
     }
 }
 
