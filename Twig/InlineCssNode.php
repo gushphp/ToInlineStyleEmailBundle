@@ -25,7 +25,7 @@ class InlineCssNode extends \Twig_Node
 
     public function compile(Twig_Compiler $compiler)
     {
-        if(is_string($this->getAttribute('css'))){
+        if (is_string($this->getAttribute('css'))) {
             if ($this->debug) {
                 $css = sprintf("file_get_contents('%s')", $this->getAttribute('css'));
             } else {
@@ -36,7 +36,7 @@ class InlineCssNode extends \Twig_Node
                 ->subcompile($this->getNode('body'))
                 ->write(sprintf('echo $context["inlinecss"]->inlineCSS(ob_get_clean(), %s);' . "\n", $css))
             ;
-        }else{
+        } else {
             //get path of css
             $compiler
                 ->addDebugInfo($this)
@@ -45,7 +45,8 @@ class InlineCssNode extends \Twig_Node
                 ->subcompile($this->getAttribute('css'))
                 ->raw('));')
                 ->subcompile($this->getNode('body'))
-                ->write('echo $context["inlinecss"]->inlineCSS(ob_get_clean(), $css);' . "\n");
+                ->write('echo $context["inlinecss"]->inlineCSS(ob_get_clean(), $css);' . "\n")
+            ;
         }
 
     }
