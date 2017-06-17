@@ -108,4 +108,4 @@ Feel free to contribute to improve this bundle.
 
 About the author of the bundle
 ==============================
-**ToInlineStyleEmailBundle** has been originally developed by Roberto Trunfio. Currently, the bundle is mantained by Daniel Richter.
+**ToInlineStyleEmailBundle** has been originally developed by Roberto Trunfio. Currently, the bundle is mantained by Luis Cordova via the gushphp organization.
