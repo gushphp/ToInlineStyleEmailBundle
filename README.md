@@ -6,7 +6,7 @@ https://github.com/tijsverkoyen/CssToInlineStyles for the repository)
 
 Requirements
 ============
-**ToInlineStyleEmailBundle** is only supported on **PHP 5.3.3** and up.
+**ToInlineStyleEmailBundle** is only supported on **PHP 5.5** and up.
 
 Installation
 ============
@@ -16,14 +16,14 @@ The following lines should be added in your ```composer.json```
 
 ``` json
 "require": {
-    "robertotru/to-inline-style-email-bundle": "dev-master"
+    "gushphp/to-inline-style-email-bundle": "~1.4.0"
 },
 ```
 
 Then, register the bundle in your AppKernel by adding the following line:
 
 ``` php
-new RobertoTru\ToInlineStyleEmailBundle\RobertoTruToInlineStyleEmailBundle(),
+    new RobertoTru\ToInlineStyleEmailBundle\RobertoTruToInlineStyleEmailBundle(),
 ```
 
 Documentation and Examples
@@ -33,8 +33,8 @@ converter developed by _Tijs Verkoyen_. E.g.:
 
 ``` php
 public function indexAction() {
- $converter = $this->get('css_to_inline_email_converter');
- ...
+    $converter = $this->get('css_to_inline_email_converter');
+    ...
 }
 ```
 
@@ -46,26 +46,38 @@ $converter = $this->get('css_to_inline_email_converter');
 $html = ...; // get the HTML here
 $css = ....; // get the CSS here
 
-$converter->setHTML($html);
-$converter->setCSS($css);
+return $converter->inlineCSS($html, $css);
 ```
 
 The retrieval of the HTML and CSS files from its folder it is only up-to you. E.g. in your controller retrieve the content of your CSS as:
 
 ``` php
-file_get_contents($this->container->getParameter('kernel.root_dir').
-'/../src/Acme/TestBundle/Resources/css/mystyle.css');
+file_get_contents($this->container->getParameter('kernel.root_dir').'/../src/Acme/TestBundle/Resources/css/mystyle.css');
 ```
 
 Of course, it is supposed that a Symfony user will use a template instead of a static HTML page. Hence,
 for convenience, the service provides a function capable to render a template. E.g.:
 
 ``` php
-$converter->setHTMLByView('AcmeTestBundle:MyController:my_template.html.twig',
-   array('param_1'=>$val_of_param_1, ..., 'param_n'=>$val_of_param_n));
+$converter->setHTMLByView(
+    'AcmeTestBundle:MyController:my_template.html.twig',
+    [
+        'param_1' => $val_of_param_1,
+        // ...,
+        'param_n' => $val_of_param_n
+    ]
+);
 ```
 
 The preceding function must be used _in vece_ of function ```setHTML()```.
+
+To use the ```generateStyledHTML``` method just use it like:
+
+``` php
+$converter->setHtml($html);
+$converter->setCss($css);
+return $converter->generateStyledHTML();
+```
 
 You can use inline css directly in Twig template:
 
