@@ -34,8 +34,7 @@ class InlineCssNode extends \Twig_Node
             $compiler->addDebugInfo($this)
                 ->write("ob_start();\n")
                 ->subcompile($this->getNode('body'))
-                ->write(sprintf('echo $context["inlinecss"]->inlineCSS(ob_get_clean(), %s);' . "\n", $css))
-            ;
+                ->write(sprintf('echo $context["inlinecss"]->inlineCSS(ob_get_clean(), %s);' . "\n", $css));
         } else {
             //get path of css
             $compiler
@@ -45,8 +44,7 @@ class InlineCssNode extends \Twig_Node
                 ->subcompile($this->getAttribute('css'))
                 ->raw('));')
                 ->subcompile($this->getNode('body'))
-                ->write('echo $context["inlinecss"]->inlineCSS(ob_get_clean(), $css);' . "\n")
-            ;
+                ->write('echo $context["inlinecss"]->inlineCSS(ob_get_clean(), $css);' . "\n");
         }
 
     }
