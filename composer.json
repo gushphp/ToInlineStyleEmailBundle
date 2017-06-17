@@ -1,9 +1,9 @@
 {
-    "name": "robertotru/to-inline-style-email-bundle",
+    "name": "gushphp/to-inline-style-email-bundle",
     "type": "symfony-bundle",
     "description": "A Symfony2 bundle for using the CssToInlineStyles translator by tijsverkoyen",
     "keywords": ["css", "inline", "style", "email", "symfony", "bundle"],
-    "homepage": "http://github.com/robertotru/ToInlineStyleEmailBundle",
+    "homepage": "http://github.com/gushphp/ToInlineStyleEmailBundle",
     "license": "MIT",
     "authors": [
         {
@@ -26,7 +26,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.3-dev"
+            "dev-master": "1.4-dev"
         }
     }
 }
