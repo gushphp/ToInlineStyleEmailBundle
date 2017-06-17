@@ -56,9 +56,9 @@ class InlineCssParser extends \Twig_TokenParser
     {
         $lineNo = $token->getLine();
         $stream = $this->parser->getStream();
-        if($stream->test(Twig_Token::STRING_TYPE)){
+        if ($stream->test(Twig_Token::STRING_TYPE)) {
             $css = $this->resolvePath($stream->expect(Twig_Token::STRING_TYPE)->getValue());
-        }else{
+        } else {
             $css = $this->parser->getExpressionParser()->parseExpression();
         }
         $stream->expect(Twig_Token::BLOCK_END_TYPE);
@@ -94,7 +94,7 @@ class InlineCssParser extends \Twig_TokenParser
             return $this->locator->locate($path, $this->webRoot);
         } catch (\InvalidArgumentException $e) {
             // happens when path is not bundle relative
-            return $this->webRoot.'/'.$path;
+            return $this->webRoot . '/' . $path;
         }
     }
 }
