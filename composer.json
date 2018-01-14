@@ -15,7 +15,7 @@
     ],
     "require": {
         "php": ">=5.5",
-        "tijsverkoyen/css-to-inline-styles": "*"
+        "tijsverkoyen/css-to-inline-styles": "~2.1.1"
     },
     "require-dev": {
         "symfony/framework-bundle": "*",
