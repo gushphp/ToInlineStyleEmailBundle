@@ -69,7 +69,7 @@ $converter->setHTMLByView(
 );
 ```
 
-The preceding function must be used _in vece_ of function ```setHTML()```.
+The preceding function must be used _instead_ of ```setHTML()```.
 
 To use the ```generateStyledHTML``` method just use it like:
 
@@ -120,6 +120,10 @@ Dynamic variable is supported (Use absolute path with variable with asset or dir
 ```
 
 Read the docs in the files for further details on the usage of the service.
+
+Configuration
+=============
+The `css_to_inline_email_twig_extension.web_root` parameter contains the path to the root directory accessible to the web. This path is assumed to be a `web` directory just outside the kernel root directory as recommended in Symfony 2-3 (`%kernel.root_dir%/../web`). With Symfony 4, the recommended path moved to a `public` directory just outside the kernel root directory (`%kernel.root_dir%/../public`). Override the parameter with the correct path for your implementation.
 
 Contributing
 ============

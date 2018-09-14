@@ -12,7 +12,6 @@
 namespace RobertoTru\ToInlineStyleEmailBundle\Twig;
 
 use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Component\Templating\TemplateNameParserInterface;
 use Twig_Node;
 use Twig_Token;
 
