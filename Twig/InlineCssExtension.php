@@ -13,21 +13,30 @@ namespace RobertoTru\ToInlineStyleEmailBundle\Twig;
 
 use RobertoTru\ToInlineStyleEmailBundle\Converter\ToInlineStyleEmailConverter;
 use Symfony\Component\Config\FileLocatorInterface;
+use Twig\Extension\GlobalsInterface as TwigExtensionGlobalsInterface;
 
-class InlineCssExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+/**
+ * Responsible to construct the instance responsible to inject the inline csss.
+ *
+ * @package RobertoTru\ToInlineStyleEmailBundle\Twig
+ */
+class InlineCssExtension extends \Twig_Extension implements TwigExtensionGlobalsInterface
 {
     /**
      * @var ToInlineStyleEmailConverter
      */
     private $inlineCss;
+
     /**
      * @var string
      */
     private $webRoot;
+
     /**
      * @var FileLocatorInterface
      */
     private $locator;
+
     /**
      * @var bool
      */
@@ -40,9 +49,9 @@ class InlineCssExtension extends \Twig_Extension implements \Twig_Extension_Glob
         $debug = false
     ) {
         $this->inlineCss = $inlineCss;
-        $this->locator = $locator;
-        $this->webRoot = $webRoot;
-        $this->debug = $debug;
+        $this->locator   = $locator;
+        $this->webRoot   = $webRoot;
+        $this->debug     = $debug;
     }
 
     /**
