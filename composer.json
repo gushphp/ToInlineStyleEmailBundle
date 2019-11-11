@@ -1,7 +1,7 @@
 {
     "name": "gushphp/to-inline-style-email-bundle",
     "type": "symfony-bundle",
-    "description": "A Symfony2 bundle for using the CssToInlineStyles translator by tijsverkoyen",
+    "description": "A Symfony bundle for using the CssToInlineStyles translator by tijsverkoyen",
     "keywords": ["css", "inline", "style", "email", "symfony", "bundle"],
     "homepage": "http://github.com/gushphp/ToInlineStyleEmailBundle",
     "license": "MIT",
@@ -19,7 +19,8 @@
     },
     "require-dev": {
         "symfony/framework-bundle": "*",
-        "phpunit/phpunit": "^4.4"
+        "phpunit/phpunit": "^4.4",
+        "twig/twig": "*"
     },
     "autoload": {
         "psr-4": { "RobertoTru\\ToInlineStyleEmailBundle\\": "" }

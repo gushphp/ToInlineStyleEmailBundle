@@ -13,22 +13,30 @@ namespace RobertoTru\ToInlineStyleEmailBundle\Twig;
 
 use RobertoTru\ToInlineStyleEmailBundle\Converter\ToInlineStyleEmailConverter;
 use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Component\Templating\TemplateNameParserInterface;
+use Twig\Extension\GlobalsInterface as TwigExtensionGlobalsInterface;
 
-class InlineCssExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+/**
+ * Responsible to construct the instance responsible to inject the inline csss.
+ *
+ * @package RobertoTru\ToInlineStyleEmailBundle\Twig
+ */
+class InlineCssExtension extends \Twig_Extension implements TwigExtensionGlobalsInterface
 {
     /**
      * @var ToInlineStyleEmailConverter
      */
     private $inlineCss;
+
     /**
      * @var string
      */
-    private $kernelRoot;
+    private $webRoot;
+
     /**
      * @var FileLocatorInterface
      */
     private $locator;
+
     /**
      * @var bool
      */
@@ -37,13 +45,13 @@ class InlineCssExtension extends \Twig_Extension implements \Twig_Extension_Glob
     public function __construct(
         ToInlineStyleEmailConverter $inlineCss,
         FileLocatorInterface $locator,
-        $kernelRoot,
+        $webRoot,
         $debug = false
     ) {
         $this->inlineCss = $inlineCss;
-        $this->locator = $locator;
-        $this->kernelRoot = $kernelRoot;
-        $this->debug = $debug;
+        $this->locator   = $locator;
+        $this->webRoot   = $webRoot;
+        $this->debug     = $debug;
     }
 
     /**
@@ -51,7 +59,7 @@ class InlineCssExtension extends \Twig_Extension implements \Twig_Extension_Glob
      */
     public function getTokenParsers()
     {
-        return array(new InlineCssParser($this->locator, $this->kernelRoot . '/../web', $this->debug));
+        return array(new InlineCssParser($this->locator, $this->webRoot, $this->debug));
     }
 
     /**
