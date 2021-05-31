@@ -1,0 +1,16 @@
+extends: default
+
+# documentation: https://yamllint.readthedocs.io/en/stable/rules.html
+
+rules:
+    # 300 chars should be enough, but don't fail if a line is longer
+    line-length:
+        max: 300
+        level: warning
+
+    # don't bother me with this rule
+    braces: disable
+    brackets: disable
+    colons: disable
+    document-start: disable
+    hyphens: disable

@@ -1,9 +1,16 @@
 {
-    "name": "gushphp/to-inline-style-email-bundle",
+    "name": "vysokeskoly/to-inline-style-email-bundle",
     "type": "symfony-bundle",
-    "description": "A Symfony2 bundle for using the CssToInlineStyles translator by tijsverkoyen",
-    "keywords": ["css", "inline", "style", "email", "symfony", "bundle"],
-    "homepage": "http://github.com/gushphp/ToInlineStyleEmailBundle",
+    "description": "A Symfony bundle for using the CssToInlineStyles translator by tijsverkoyen",
+    "keywords": [
+        "css",
+        "inline",
+        "style",
+        "email",
+        "symfony",
+        "bundle"
+    ],
+    "homepage": "http://github.com/vysokeskoly/ToInlineStyleEmailBundle",
     "license": "MIT",
     "authors": [
         {
@@ -13,20 +20,60 @@
             "role": "Developer"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "VysokeSkoly\\ToInlineStyleEmailBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "VysokeSkoly\\ToInlineStyleEmailBundle\\": "Tests/"
+        }
+    },
     "require": {
-        "php": ">=5.5",
-        "tijsverkoyen/css-to-inline-styles": "~2.2.1"
+        "php": "^7.4",
+        "symfony/config": "^4.4 || ^5.0",
+        "symfony/dependency-injection": "^4.4 || ^5.0",
+        "symfony/http-kernel": "^4.4 || ^5.0",
+        "symfony/routing": "^4.4 || ^5.0",
+        "tijsverkoyen/css-to-inline-styles": "^2.2.1",
+        "twig/twig": "^3.0"
     },
     "require-dev": {
-        "symfony/framework-bundle": "*",
-        "phpunit/phpunit": "^4.4"
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan": "^0.12.88",
+        "phpstan/phpstan-phpunit": "^0.12.19",
+        "phpunit/phpunit": "^9.5",
+        "symfony/framework-bundle": "*"
     },
-    "autoload": {
-        "psr-4": { "RobertoTru\\ToInlineStyleEmailBundle\\": "" }
+    "config": {
+        "sort-packages": true
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.5-dev"
-        }
+    "scripts": {
+        "post-install-cmd": [
+            "@installTools"
+        ],
+        "post-update-cmd": [
+            "@updateTools"
+        ],
+        "installTools": [
+            "cd tools/coding-standards && composer install && composer link"
+        ],
+        "updateTools": [
+            "cd tools/coding-standards && composer update && composer link"
+        ],
+        "all": [
+            "@analyze",
+            "@tests"
+        ],
+        "analyze": [
+            "@cs",
+            "@phpstan"
+        ],
+        "cs": "vendor/bin/ecs check --ansi -- src/ tests/ ecs.php",
+        "phpstan": "vendor/bin/phpstan analyze ./src ./tests -c phpstan.neon --ansi --level 7",
+        "fix": "vendor/bin/ecs check src/ tests/ ecs.php --ansi --fix",
+        "tests": "./vendor/bin/phpunit --colors=always",
+        "tests-ci": "./vendor/bin/phpunit -c phpunit.xml.dist --coverage-html=reports/html --coverage-clover=reports/clover.xml --log-junit=reports/junit.xml"
     }
 }

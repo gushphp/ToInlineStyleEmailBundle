@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of ToInlineStyleEmailBundle.
@@ -9,9 +9,13 @@
  * file that was distributed with this source code.
  */
 
-$file = __DIR__.'/../vendor/autoload.php';
-if (!file_exists($file)) {
-    throw new RuntimeException('Install dependencies to run test suite. "php composer.phar install --dev"');
-}
+namespace VysokeSkoly\ToInlineStyleEmailBundle\Converter;
 
-require_once $file;
+/**
+ * Exception for a missing parameter.
+ *
+ * @author Roberto Trunfio <roberto@trunfio.it>
+ */
+class MissingParamException extends \Exception
+{
+}

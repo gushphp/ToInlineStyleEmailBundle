@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of ToInlineStyleEmailBundle.
@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace RobertoTru\ToInlineStyleEmailBundle\Tests;
+namespace VysokeSkoly\ToInlineStyleEmailBundle;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class ToInlineStyleEmailBundleTest extends WebTestCase
 {
-    public function testIndex()
+    public function testIndex(): void
     {
-
+        $this->markTestIncomplete('todo');
     }
 }
