@@ -1,0 +1,49 @@
+name: PHP - Checks
+
+on:
+    #push:
+    pull_request:
+    #schedule:
+    #    -   cron:  '0 3 * * *'
+
+jobs:
+    checks:
+        runs-on: ubuntu-latest
+        name: PHP 7.4 - checks
+        steps:
+            # Setup
+            -   uses: actions/checkout@v2
+
+            -   name: '[PHP] Setup'
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    extensions: mbstring, intl
+
+            # Prepare application
+            -   name: '[INIT] Check composer.json'
+                run: composer validate --no-check-all --no-check-publish --no-check-lock
+
+            -   name: '[INIT] Install dependencies'
+                run: composer update --prefer-dist --no-progress
+
+            # Check application
+            -   name: '[CHECK] codestyle'
+                run: composer cs
+
+            -   name: '[CHECK] phpstan'
+                run: composer phpstan
+
+            -   name: '[CHECK] Unit tests'
+                run: composer tests
+
+            # Check lowest dependencies
+            -   name: '[INIT-LOWEST] Install dependencies'
+                run: composer update --prefer-lowest --prefer-dist --no-progress
+
+            # Check application
+            -   name: '[CHECK-LOWEST] Phpstan'
+                run: composer phpstan
+
+            -   name: '[CHECK-LOWEST] Unit tests'
+                run: composer tests
