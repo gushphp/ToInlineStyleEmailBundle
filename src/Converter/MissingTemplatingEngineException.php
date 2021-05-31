@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of ToInlineStyleEmailBundle.
@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace RobertoTru\ToInlineStyleEmailBundle\Converter;
+namespace VysokeSkoly\ToInlineStyleEmailBundle\Converter;
 
 /**
- * Exception for a missing parameter.
+ * Exception for missing TwigEngine.
  *
  * @author Roberto Trunfio <roberto@trunfio.it>
  */
-class MissingParamException extends \Exception
+class MissingTemplatingEngineException extends \Exception
 {
-
 }

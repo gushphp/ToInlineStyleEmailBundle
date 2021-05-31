@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of ToInlineStyleEmailBundle.
@@ -9,36 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace RobertoTru\ToInlineStyleEmailBundle\Twig;
+namespace VysokeSkoly\ToInlineStyleEmailBundle\Twig;
 
 use Symfony\Component\Config\FileLocatorInterface;
-use Symfony\Component\Templating\TemplateNameParserInterface;
-use Twig_Node;
-use Twig_Token;
+use Twig\Node\Node;
+use Twig\Token;
+use Twig\TokenParser\AbstractTokenParser;
 
-class InlineCssParser extends \Twig_TokenParser
+class InlineCssParser extends AbstractTokenParser
 {
-    /**
-     * @var FileLocatorInterface
-     */
-    private $locator;
-
-    /**
-     * @var string
-     */
-    protected $webRoot;
-
-    /**
-     * @var bool
-     */
-    private $debug;
+    private FileLocatorInterface $locator;
+    protected string $webRoot;
+    private bool $debug;
 
     /**
      * @param FileLocatorInterface $locator used to get css asset real path
      * @param string $webRoot web root of the project
      * @param bool $debug in debug mode css is not inlined but read on each render
      */
-    public function __construct(FileLocatorInterface $locator, $webRoot, $debug = false)
+    public function __construct(FileLocatorInterface $locator, string $webRoot, bool $debug = false)
     {
         $this->locator = $locator;
         $this->webRoot = $webRoot;
@@ -47,23 +36,19 @@ class InlineCssParser extends \Twig_TokenParser
 
     /**
      * Parses a token and returns a node.
-     *
-     * @param Twig_Token $token A Twig_Token instance
-     *
-     * @return Twig_Node A Twig_Node instance
      */
-    public function parse(Twig_Token $token)
+    public function parse(Token $token): Node
     {
         $lineNo = $token->getLine();
         $stream = $this->parser->getStream();
-        if ($stream->test(Twig_Token::STRING_TYPE)) {
-            $css = $this->resolvePath($stream->expect(Twig_Token::STRING_TYPE)->getValue());
-        } else {
-            $css = $this->parser->getExpressionParser()->parseExpression();
-        }
-        $stream->expect(Twig_Token::BLOCK_END_TYPE);
-        $body = $this->parser->subparse(array($this, 'decideEnd'), true);
-        $stream->expect(Twig_Token::BLOCK_END_TYPE);
+
+        $css = $stream->test(Token::STRING_TYPE)
+            ? $this->resolvePath($stream->expect(Token::STRING_TYPE)->getValue())
+            : $this->parser->getExpressionParser()->parseExpression();
+
+        $stream->expect(Token::BLOCK_END_TYPE);
+        $body = $this->parser->subparse([$this, 'decideEnd'], true);
+        $stream->expect(Token::BLOCK_END_TYPE);
 
         return new InlineCssNode($body, $css, $lineNo, $this->debug);
     }
@@ -73,25 +58,27 @@ class InlineCssParser extends \Twig_TokenParser
      *
      * @return string The tag name
      */
-    public function getTag()
+    public function getTag(): string
     {
         return 'inlinecss';
     }
 
-    public function decideEnd(Twig_Token $token)
+    public function decideEnd(Token $token): bool
     {
         return $token->test('endinlinecss');
     }
 
     /**
      * Resolve path to absolute if any bundle is mentioned
-     * @param string $path
-     * @return string
      */
-    private function resolvePath($path)
+    private function resolvePath(string $path): string
     {
         try {
-            return $this->locator->locate($path, $this->webRoot);
+            $path = $this->locator->locate($path, $this->webRoot);
+
+            return is_array($path)
+                ? reset($path)
+                : $path;
         } catch (\InvalidArgumentException $e) {
             // happens when path is not bundle relative
             return $this->webRoot . '/' . $path;

@@ -1,3 +1,8 @@
 phpunit.xml
 composer.lock
 /vendor
+.phpunit.result.cache
+
+code-coverage/
+
+tools/*/vendor/

@@ -1,0 +1,5 @@
+parameters:
+    checkMissingIterableValueType: false
+    excludes_analyse:
+        - src/DependencyInjection/Configuration.php
+    ignoreErrors:

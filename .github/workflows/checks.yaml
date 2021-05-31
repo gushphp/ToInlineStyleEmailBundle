@@ -1,0 +1,40 @@
+name: Checks
+
+on:
+    #push:
+    pull_request:
+    #schedule:
+    #    -   cron:  '0 3 * * *'
+
+jobs:
+    markdown-link-check: # https://github.com/gaurav-nelson/github-action-markdown-link-check
+        name: "Markdown link check"
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: gaurav-nelson/github-action-markdown-link-check@v1
+                with:
+                    use-verbose-mode: 'yes'
+
+    shellcheck: # https://github.com/marketplace/actions/shellcheck
+        name: Shellcheck
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   name: Run ShellCheck
+                uses: ludeeus/action-shellcheck@master
+                env:
+                    SHELLCHECK_OPTS: -e SC1090
+
+    yamllint: # https://github.com/marketplace/actions/yamllint-github-action
+        name: 'Yamllint'
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   name: 'Yamllint'
+                uses: karancode/yamllint-github-action@master
+                with:
+                    yamllint_file_or_dir: '.'
+                    yamllint_config_filepath: '.github/config/yamllint.yaml'
+                    yamllint_strict: false
+                    yamllint_comment: false

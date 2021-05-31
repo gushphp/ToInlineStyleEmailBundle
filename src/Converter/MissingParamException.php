@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /*
  * This file is part of ToInlineStyleEmailBundle.
@@ -9,14 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace RobertoTru\ToInlineStyleEmailBundle\Tests;
+namespace VysokeSkoly\ToInlineStyleEmailBundle\Converter;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-class ToInlineStyleEmailBundleTest extends WebTestCase
+/**
+ * Exception for a missing parameter.
+ *
+ * @author Roberto Trunfio <roberto@trunfio.it>
+ */
+class MissingParamException extends \Exception
 {
-    public function testIndex()
-    {
-
-    }
 }

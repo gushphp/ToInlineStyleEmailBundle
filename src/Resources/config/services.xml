@@ -5,8 +5,8 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="css_to_inline_email_converter.class">RobertoTru\ToInlineStyleEmailBundle\Converter\ToInlineStyleEmailConverter</parameter>
-        <parameter key="css_to_inline_email_twig_extension.class">RobertoTru\ToInlineStyleEmailBundle\Twig\InlineCssExtension</parameter>
+        <parameter key="css_to_inline_email_converter.class">VysokeSkoly\ToInlineStyleEmailBundle\Converter\ToInlineStyleEmailConverter</parameter>
+        <parameter key="css_to_inline_email_twig_extension.class">VysokeSkoly\ToInlineStyleEmailBundle\Twig\InlineCssExtension</parameter>
     </parameters>
 
     <services>
@@ -16,7 +16,8 @@
         <service id="css_to_inline_email_twig_extension" class="%css_to_inline_email_twig_extension.class%">
             <argument type="service" id="css_to_inline_email_converter" />
             <argument type="service" id="file_locator" />
-            <argument>%kernel.root_dir%</argument>
+            <argument>%kernel.project_dir%</argument>
+            <argument>%css_to_inline_email.web_dir%</argument>
             <argument>%kernel.debug%</argument>
             <tag name="twig.extension" />
         </service>
