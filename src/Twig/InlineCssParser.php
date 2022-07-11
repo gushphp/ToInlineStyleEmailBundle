@@ -18,20 +18,13 @@ use Twig\TokenParser\AbstractTokenParser;
 
 class InlineCssParser extends AbstractTokenParser
 {
-    private FileLocatorInterface $locator;
-    protected string $webRoot;
-    private bool $debug;
-
     /**
      * @param FileLocatorInterface $locator used to get css asset real path
      * @param string $webRoot web root of the project
      * @param bool $debug in debug mode css is not inlined but read on each render
      */
-    public function __construct(FileLocatorInterface $locator, string $webRoot, bool $debug = false)
+    public function __construct(private FileLocatorInterface $locator, protected string $webRoot, private bool $debug = false)
     {
-        $this->locator = $locator;
-        $this->webRoot = $webRoot;
-        $this->debug = $debug;
     }
 
     /**

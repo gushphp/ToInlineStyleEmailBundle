@@ -31,22 +31,25 @@
         }
     },
     "require": {
-        "php": "^7.4",
-        "symfony/config": "^4.4 || ^5.0",
-        "symfony/dependency-injection": "^4.4 || ^5.0",
-        "symfony/http-kernel": "^4.4 || ^5.0",
-        "symfony/routing": "^4.4 || ^5.0",
+        "php": "^8.1",
+        "symfony/config": "^5.0 || ^6.0",
+        "symfony/dependency-injection": "^5.0 || ^6.0",
+        "symfony/http-kernel": "^5.0 || ^6.0",
+        "symfony/routing": "^5.0 || ^6.0",
         "tijsverkoyen/css-to-inline-styles": "^2.2.1",
         "twig/twig": "^3.0"
     },
     "require-dev": {
         "phpstan/extension-installer": "^1.1",
-        "phpstan/phpstan": "^0.12.88",
-        "phpstan/phpstan-phpunit": "^0.12.19",
-        "phpunit/phpunit": "^9.5"
+        "phpstan/phpstan": "^1.8",
+        "phpstan/phpstan-phpunit": "^1.1",
+        "phpunit/phpunit": "^9.5.20"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
     },
     "scripts": {
         "post-install-cmd": [
@@ -70,7 +73,7 @@
             "@phpstan"
         ],
         "cs": "vendor/bin/ecs check --ansi -- src/ tests/ ecs.php",
-        "phpstan": "vendor/bin/phpstan analyze ./src ./tests -c phpstan.neon --ansi --level 7",
+        "phpstan": "vendor/bin/phpstan analyze ./src ./tests -c phpstan.neon --ansi --level 8",
         "fix": "vendor/bin/ecs check src/ tests/ ecs.php --ansi --fix",
         "tests": "./vendor/bin/phpunit --colors=always",
         "tests-ci": "./vendor/bin/phpunit -c phpunit.xml.dist --coverage-html=reports/html --coverage-clover=reports/clover.xml --log-junit=reports/junit.xml"

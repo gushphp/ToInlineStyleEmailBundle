@@ -18,29 +18,18 @@ use VysokeSkoly\ToInlineStyleEmailBundle\Converter\ToInlineStyleEmailConverter;
 
 class InlineCssExtension extends AbstractExtension implements GlobalsInterface
 {
-    private ToInlineStyleEmailConverter $inlineCss;
-    private string $projectRoot;
-    private string $webDir;
-    private FileLocatorInterface $locator;
-    private bool $debug;
-
     public function __construct(
-        ToInlineStyleEmailConverter $inlineCss,
-        FileLocatorInterface $locator,
-        string $kernelRoot,
-        string $webDir,
-        bool $debug = false
+        private ToInlineStyleEmailConverter $inlineCss,
+        private FileLocatorInterface $locator,
+        private string $kernelRoot,
+        private string $webDir,
+        private bool $debug = false,
     ) {
-        $this->inlineCss = $inlineCss;
-        $this->locator = $locator;
-        $this->projectRoot = $kernelRoot;
-        $this->webDir = $webDir;
-        $this->debug = $debug;
     }
 
     public function getTokenParsers(): array
     {
-        return [new InlineCssParser($this->locator, $this->projectRoot . '/' . $this->webDir, $this->debug)];
+        return [new InlineCssParser($this->locator, $this->kernelRoot . '/' . $this->webDir, $this->debug)];
     }
 
     public function getGlobals(): array

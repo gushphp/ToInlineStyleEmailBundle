@@ -16,12 +16,8 @@ use Twig\Node\Node;
 
 class InlineCssNode extends Node
 {
-    private bool $debug;
-
-    /** @param mixed $css */
-    public function __construct(Node $body, $css, int $lineno, bool $debug, string $tag = 'inlinecss')
+    public function __construct(Node $body, mixed $css, int $lineno, private bool $debug, string $tag = 'inlinecss')
     {
-        $this->debug = $debug;
         parent::__construct(['body' => $body], ['css' => $css], $lineno, $tag);
     }
 

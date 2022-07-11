@@ -9,7 +9,7 @@ on:
 jobs:
     checks:
         runs-on: ubuntu-latest
-        name: PHP 7.4 - checks
+        name: PHP - checks
         steps:
             # Setup
             -   uses: actions/checkout@v2
@@ -17,7 +17,7 @@ jobs:
             -   name: '[PHP] Setup'
                 uses: shivammathur/setup-php@v2
                 with:
-                    php-version: 7.4
+                    php-version: 8.1
                     extensions: mbstring, intl
 
             # Prepare application
