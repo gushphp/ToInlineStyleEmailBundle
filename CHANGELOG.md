@@ -2,6 +2,8 @@
  
  <!-- There should always be "Unreleased" section at the beginning.-->
 ## Unreleased
+
+## 2.0.0 - 2021-05-31
 - Require php 7.4
 - Allow symfony 4.4 or 5.0
 - Require twig 3
